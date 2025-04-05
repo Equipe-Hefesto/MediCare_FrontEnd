@@ -54,7 +54,7 @@ export default function CadastroUtilizador3(){
             setBorderColor4("#267797")
         
         if (email != "" && telefone != "" && senha != "" && confirmarSenha != "")
-            router.push("./cadastroUtilizador3")
+            router.push("./cadastroUtilizador4")
     }
     
     return (

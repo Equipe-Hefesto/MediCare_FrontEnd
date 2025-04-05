@@ -3,12 +3,15 @@ import { styles } from "../barraProgresso/styles"
 import { usePathname } from "expo-router";
 
 export function BarraProgresso(){
+    const pathname = usePathname();
+    const backgroundColor = pathname=== "/src/app/cadastroUtilizador2" ? "white": "#267797";
     return (
+
         <View style={styles.containerPai}>
             
             <View style={styles.containerCirculo}>
                 
-                <View style={styles.containerTexto}> <Text style={styles.numero}> 1 </Text> </View>
+                <View style={[styles.containerTexto, {backgroundColor}]}> <Text style={styles.numero}> 1 </Text> </View>
             
             </View>
 
