@@ -23,7 +23,7 @@ export default function Cadastro1(){
         }
         else if (tipoUsuario == "responsavel")
         {
-
+            router.push("./cadastroResponsavel2")
         }
         else if (tipoUsuario == "cuidador")
         {
