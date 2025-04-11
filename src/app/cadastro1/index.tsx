@@ -27,7 +27,7 @@ export default function Cadastro1(){
         }
         else if (tipoUsuario == "cuidador")
         {
-
+            router.push("./cadastroCuidador2")
         }
         else
         {

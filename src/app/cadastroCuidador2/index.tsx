@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { styles } from "../cadastroResponsavel2/styles"
+import { styles } from "../cadastroCuidador2/styles"
 import { SemiTopBar } from "../../components/semiTopBar";
 import { BarraProgresso } from "../../components/barraProgresso";
 import { InputTexto } from "../../components/inputTexto";
@@ -8,7 +8,7 @@ import { Botao } from "../../components/botao";
 import { useRouter } from "expo-router";
 import { AlertCustomizado } from "../../components/alertCustomizado";
 
-export default function CadastroResponsavel2(){
+export default function CadastroCuidador2(){
 
     const router = useRouter();
     const [alertaVisivel, setAlertaVisivel] = useState(false);
@@ -45,7 +45,7 @@ export default function CadastroResponsavel2(){
             setBorderColor3("#267797")
         
         if (nome != "" && sobrenome != "" && cpf != "")
-            router.push("./cadastroResponsavel3")
+            router.push("./cadastroCuidador3")
     }
 
     return(

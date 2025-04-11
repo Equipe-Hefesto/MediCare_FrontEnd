@@ -63,7 +63,7 @@ export default function CadastroUtilizador2(){
 
                     <View style={styles.containerInput}> <InputTexto borderColor={borderColor2} texto={"Informe seu Sobrenome"} onChangeText={setSobrenome} secureTextEntry={false} /> </View>
 
-                    <View style={styles.containerInput}> <InputTexto borderColor={borderColor3} texto={"Informe seu CPF"} onChangeText={setCPF} secureTextEntry={false} /> </View>
+                    <View style={styles.containerInput}> <InputTexto keyboardType={"numeric"} borderColor={borderColor3} texto={"Informe seu CPF"} onChangeText={setCPF} secureTextEntry={false} /> </View>
 
                 </View>        
 

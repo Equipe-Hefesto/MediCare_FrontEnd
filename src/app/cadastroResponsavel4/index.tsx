@@ -35,7 +35,7 @@ export default function CadastroResponsavel4(){
                 
                 <View style={styles.containerInputs}>
                 
-                    <View style={styles.containerInput}> <InputTexto texto={"Se você tem um familiar, informe o CPF"} onChangeText={setCpfUtilizador} secureTextEntry={false} /> </View>
+                    <View style={styles.containerInput}> <InputTexto keyboardType={"numeric"} texto={"Se você tem um familiar, informe o CPF"} onChangeText={setCpfUtilizador} secureTextEntry={false} /> </View>
                 
                     <View style={styles.containerInput}>
 

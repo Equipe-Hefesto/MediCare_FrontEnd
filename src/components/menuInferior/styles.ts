@@ -7,18 +7,18 @@ export const styles = StyleSheet.create({
         right: 0,
         left: 0,
         bottom: 0,
-        height: 80,
+        height: 75,
     },
 
     container:{
         flex: 1,
         backgroundColor: "#267797",
         flexDirection: "row",
-        justifyContent: "space-around",
+        marginLeft: -10,
     },
 
     iconeTexto:{
-        width: 96,
+        width: 100,
         justifyContent: "center",
         alignItems: "center",
     },

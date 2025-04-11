@@ -68,9 +68,9 @@ export default function CadastroUtilizador3(){
                 
                 <View style={styles.containerInputs}>
                 
-                    <View style={styles.containerInput}> <InputTexto borderColor={borderColor1} texto={"E-mail"} onChangeText={setEmail} secureTextEntry={false} /> </View>
+                    <View style={styles.containerInput}> <InputTexto keyboardType={"email-address"} borderColor={borderColor1} texto={"E-mail"} onChangeText={setEmail} secureTextEntry={false} /> </View>
                 
-                    <View style={styles.containerInput}> <InputTexto borderColor={borderColor2} texto={"Telefone"} onChangeText={setTelefone} secureTextEntry={false} /> </View>
+                    <View style={styles.containerInput}> <InputTexto keyboardType={"phone-pad"} borderColor={borderColor2} texto={"Telefone"} onChangeText={setTelefone} secureTextEntry={false} /> </View>
 
                     <View style={styles.containerInput}> <InputTexto borderColor={borderColor3} texto={"Crie uma senha"} onChangeText={setSenha} secureTextEntry={true} /> </View>
                 

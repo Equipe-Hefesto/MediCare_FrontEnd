@@ -13,12 +13,12 @@ export const styles = StyleSheet.create({
     },
 
     input:{
-        fontSize: 20,
+        fontSize: 15,
         borderWidth: 1,
         borderRadius: 5,
         borderColor: "#267797",
         width: 300,
-        height: 50,
+        height: 40,
         paddingLeft: 10,
     },
 })

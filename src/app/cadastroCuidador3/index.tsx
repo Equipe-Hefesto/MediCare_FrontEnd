@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { styles } from "../cadastroResponsavel3/styles"
+import { styles } from "../cadastroCuidador3/styles"
 import { SemiTopBar } from "../../components/semiTopBar";
 import { BarraProgresso } from "../../components/barraProgresso";
 import { InputTexto } from "../../components/inputTexto";
@@ -8,7 +8,7 @@ import { Botao } from "../../components/botao";
 import { AlertCustomizado } from "../../components/alertCustomizado";
 import { useState } from "react";
 
-export default function CadastroResponsavel3(){
+export default function CadastroCuidador3(){
 
     const router = useRouter();
     const [alertaVisivel, setAlertaVisivel] = useState(false);
@@ -54,7 +54,7 @@ export default function CadastroResponsavel3(){
             setBorderColor4("#267797")
         
         if (email != "" && telefone != "" && senha != "" && confirmarSenha != "")
-            router.push("./cadastroResponsavel4")
+            router.push("./cadastroCuidador4")
     }
     
     return (

@@ -1,20 +1,21 @@
 import { Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { styles } from "../cadastroUtilizador4/styles"
+import { styles } from "../cadastroCuidador4/styles"
 import { SemiTopBar } from "../../components/semiTopBar";
 import { BarraProgresso } from "../../components/barraProgresso";
 import { InputTexto } from "../../components/inputTexto";
 import { Botao } from "../../components/botao";
 import { AlertCustomizado } from "../../components/alertCustomizado";
 import { useState } from "react";
+import { Picker } from "@react-native-picker/picker";
 
-export default function CadastroUtilizador4(){
+export default function CadastroCuidador4(){
 
     const router = useRouter();
     const [alertaVisivel, setAlertaVisivel] = useState(false);
 
-    const [cpfResponsavel, setCpfResponsavel] = useState("");
-    const [cpfCuidador, setCpfCuidador] = useState("");
+    const [cpfUtilizador, setCpfUtilizador] = useState("");
+    const [parentesco, setParentesco] = useState("pai/mae");
 
 
     function proximo(){
@@ -34,9 +35,8 @@ export default function CadastroUtilizador4(){
                 
                 <View style={styles.containerInputs}>
                 
-                    <View style={styles.containerInput}> <InputTexto keyboardType={"numeric"} texto={"Se você tem um responsável, informe o CPF"} onChangeText={setCpfResponsavel} secureTextEntry={false} /> </View>
+                    <View style={styles.containerInput}> <InputTexto keyboardType={"numeric"} texto={"Se você tem um paciente, informe o CPF"} onChangeText={setCpfUtilizador} secureTextEntry={false} /> </View>
                 
-                    <View style={styles.containerInput}> <InputTexto keyboardType={"numeric"} texto={"Se você tem um Cuidador, informe o CPF"} onChangeText={setCpfCuidador} secureTextEntry={false} /> </View>
                 </View>        
                 
                 <View style={styles.containerBotao}> <Botao texto={"Próximo"} width={150} onPress={proximo}/> </View>
