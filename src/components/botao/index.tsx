@@ -11,7 +11,7 @@ export function Botao( {texto, width, onPress}: Props ){
     return (
     <TouchableOpacity activeOpacity={0.7} style={[styles.botao, { width }]} onPress={onPress}>
     
-        <Text style={styles.texto}> {texto} </Text>
+        <Text style={styles.texto}> {String(texto)} </Text>
     
     </TouchableOpacity>
     );

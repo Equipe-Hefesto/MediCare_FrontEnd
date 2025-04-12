@@ -18,7 +18,7 @@ export function InputTexto( {borderColor, texto, secureTextEntry, onChangeText, 
     return (
         <View style={styles.containerTextoInput}>
         
-            <Text style={styles.texto}> { texto } </Text>
+            <Text style={styles.texto}> {String(texto)} </Text>
             <TextInput keyboardType={keyboardType || 'default'} onChangeText={onChangeText} style={[styles.input, { borderColor }]} secureTextEntry={secureTextEntry} />
     
         </View>
