@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#267797",
         flexDirection: "row",
+        justifyContent: "space-around",
         marginLeft: -10,
     },
 
