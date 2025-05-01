@@ -4,9 +4,11 @@ import {TopBar} from "../../components/topBar";
 import {styles} from "../home/styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
+import { useRouter } from "expo-router";
 
 export default function TelaInicial(){
     const [alertaVisivel, setAlertaVisivel] = useState(false);
+    const router = useRouter();
     return (
         <View style={styles.containerPai}>
             
@@ -42,7 +44,7 @@ export default function TelaInicial(){
 
             </TouchableOpacity>
             
-            <TouchableOpacity activeOpacity={0.8} style={styles.containerBotao}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.containerBotao} onPress={() => router.replace("./cadastroRemedio")}>
 
                 <View style={styles.iconeBotao}>
 
@@ -74,7 +76,7 @@ export default function TelaInicial(){
             
             </TouchableOpacity>
             
-            <View style={styles.menuInferior}> <MenuInferior /> </View>
+            <View style={styles.menuInferior}> <MenuInferior cor1={"#ACE1F5"} cor2={"#fff"} cor3={"#fff"} cor4={"#fff"}/> </View>
         
         </View>
     )

@@ -1,12 +1,12 @@
 import { Text, View } from "react-native";
 import { styles } from "../cadastroResponsavel2/styles"
 import { SemiTopBar } from "../../components/semiTopBar";
-import { BarraProgresso } from "../../components/barraProgresso";
 import { InputTexto } from "../../components/inputTexto";
 import { useState } from "react";
 import { Botao } from "../../components/botao";
 import { useRouter } from "expo-router";
 import { AlertCustomizado } from "../../components/alertCustomizado";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function CadastroResponsavel2(){
 
@@ -55,7 +55,39 @@ export default function CadastroResponsavel2(){
 
             <View style={styles.container}>
 
-                <BarraProgresso />
+                <View style={styles.containerBarra}>
+                            
+                    <View style={styles.containerCirculoFeito}>
+                                    
+                        <View style={styles.containerTexto}> <MaterialCommunityIcons style={styles.numero} name="check" color={"#fff"}/> </View>
+                                
+                    </View>
+                    
+                    <View style={styles.linha}> </View>
+                    
+                    <View style={styles.containerCirculoFeito}>
+                                    
+                        <View style={styles.containerTexto}> <Text style={styles.numeroAtual}> 2 </Text> </View>
+                                
+                    </View>
+                    
+                    <View style={styles.linha}> </View>
+                    
+                    <View style={styles.containerCirculo}>
+                                    
+                        <View style={styles.containerTexto}> <Text style={styles.numero}> 3 </Text> </View>
+                                
+                    </View>
+                    
+                    <View style={styles.linha}> </View>
+                    
+                    <View style={styles.containerCirculo}>
+                                    
+                        <View style={styles.containerTexto}> <Text style={styles.numero}> 4 </Text> </View>
+                                
+                    </View>
+                    
+                </View>
 
                 <View style={styles.containerInputs}>
 

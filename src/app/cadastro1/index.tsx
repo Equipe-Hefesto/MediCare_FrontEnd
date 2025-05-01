@@ -1,7 +1,6 @@
 import { View, Text } from "react-native";
 import { styles } from "../cadastro1/styles";
 import { SemiTopBar } from "../../components/semiTopBar";
-import { BarraProgresso } from "../../components/barraProgresso";
 import { AlertCustomizado } from "../../components/alertCustomizado";
 import { Botao } from "../../components/botao";
 import { Picker } from "@react-native-picker/picker";
@@ -42,7 +41,39 @@ export default function Cadastro1(){
 
             <View style={styles.container}>
 
-                <BarraProgresso />
+                <View style={styles.containerBarra}>
+                            
+                    <View style={styles.containerCirculoFeito}>
+                                    
+                        <View style={styles.containerTexto}> <Text style={styles.numeroAtual}> 1 </Text> </View>
+                                
+                    </View>
+                    
+                    <View style={styles.linha}> </View>
+                    
+                    <View style={styles.containerCirculo}>
+                                    
+                        <View style={styles.containerTexto}> <Text style={styles.numero}> 2 </Text> </View>
+                                
+                    </View>
+                    
+                    <View style={styles.linha}> </View>
+                    
+                    <View style={styles.containerCirculo}>
+                                    
+                        <View style={styles.containerTexto}> <Text style={styles.numero}> 3 </Text> </View>
+                                
+                    </View>
+                    
+                    <View style={styles.linha}> </View>
+                    
+                    <View style={styles.containerCirculo}>
+                                    
+                        <View style={styles.containerTexto}> <Text style={styles.numero}> 4 </Text> </View>
+                                
+                    </View>
+                    
+                </View>
 
                 <Text style={styles.titulo}> Vamos Começar! </Text>
 

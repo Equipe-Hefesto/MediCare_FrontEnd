@@ -4,17 +4,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { usePathname } from "expo-router";
 
-export function MenuInferior(){
+interface Props {
+    cor1: string
+    cor2: string
+    cor3: string
+    cor4: string
+}
 
-    const pathname = usePathname();
-
-    const cor1 = pathname === '../../home' ? 'white' : "#ACE1F5";
-
-    const cor2 = pathname === '../../home' ? 'white' : "white";
-
-    const cor3 = pathname === '../../home' ? 'white' : "white";
-
-    const cor4 = pathname === '../../home' ? 'white' : "white";
+export function MenuInferior({cor1, cor2, cor3, cor4}:Props){
 
     const router = useRouter();
 
@@ -37,7 +34,7 @@ export function MenuInferior(){
                
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.iconeTexto}>
+                <TouchableOpacity style={styles.iconeTexto} onPress={() => router.replace('/cadastroRemedio')}>
 
                     <MaterialCommunityIcons color={cor3} style={styles.icone} name="pill"/>
                     <Text style={{marginTop: 5, color: cor3}}> Medicamentos </Text>      

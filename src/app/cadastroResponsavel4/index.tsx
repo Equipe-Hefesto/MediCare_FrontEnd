@@ -2,12 +2,12 @@ import { Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import { styles } from "../cadastroResponsavel4/styles"
 import { SemiTopBar } from "../../components/semiTopBar";
-import { BarraProgresso } from "../../components/barraProgresso";
 import { InputTexto } from "../../components/inputTexto";
 import { Botao } from "../../components/botao";
 import { AlertCustomizado } from "../../components/alertCustomizado";
 import { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function CadastroResponsavel4(){
 
@@ -31,7 +31,39 @@ export default function CadastroResponsavel4(){
             
             <View style={styles.container}>
 
-                <BarraProgresso />
+                <View style={styles.containerBarra}>
+                                
+                    <View style={styles.containerCirculoFeito}>
+                                                        
+                        <View style={styles.containerTexto}> <MaterialCommunityIcons style={styles.numero} name="check" color={"#fff"}/> </View>
+                                                    
+                    </View>
+                                        
+                    <View style={styles.linha}> </View>
+                                        
+                    <View style={styles.containerCirculoFeito}>
+                                                        
+                        <View style={styles.containerTexto}> <MaterialCommunityIcons style={styles.numero} name="check" color={"#fff"}/> </View>
+                                                    
+                    </View>
+                                        
+                    <View style={styles.linha}> </View>
+                                        
+                    <View style={styles.containerCirculoFeito}>
+                                                        
+                        <View style={styles.containerTexto}> <MaterialCommunityIcons style={styles.numero} name="check" color={"#fff"}/> </View>
+                                                    
+                    </View>
+                                        
+                    <View style={styles.linha}> </View>
+                                        
+                    <View style={styles.containerCirculoFeito}>
+                                                        
+                        <View style={styles.containerTexto}> <Text style={styles.numeroAtual}> 4 </Text> </View>
+                                                    
+                    </View>
+                                    
+                </View>
                 
                 <View style={styles.containerInputs}>
                 

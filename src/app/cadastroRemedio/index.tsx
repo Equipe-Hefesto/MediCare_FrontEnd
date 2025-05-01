@@ -26,7 +26,7 @@ export default function CadastroRemedio(){
 
                 </View>
 
-            <MenuInferior />
+            <MenuInferior cor1={"#fff"} cor2={"#fff"} cor3={"#ACE1F5"} cor4={"#fff"}/>
 
         </View>
     )
