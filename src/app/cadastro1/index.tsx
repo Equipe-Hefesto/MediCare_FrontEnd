@@ -4,32 +4,35 @@ import { SemiTopBar } from "../../components/semiTopBar";
 import { AlertCustomizado } from "../../components/alertCustomizado";
 import { Botao } from "../../components/botao";
 import { Picker } from "@react-native-picker/picker";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+export let idTipo = 0
 
-export default function Cadastro1(){
+export default function Cadastro1() {
 
     const router = useRouter();
 
     const [alertaVisivel, setAlertaVisivel] = useState(false);
     const [tipoUsuario, setTipoUsuario] = useState("utilizador");
 
-    function proximo(){
-        if (tipoUsuario == "utilizador")
-        {
+    function proximo() {
+        if (tipoUsuario == "utilizador") {
+            idTipo = 2
+
             router.push("./cadastroUtilizador2")
         }
-        else if (tipoUsuario == "responsavel")
-        {
+        else if (tipoUsuario == "responsavel") {
+             idTipo = 3
+
             router.push("./cadastroResponsavel2")
         }
-        else if (tipoUsuario == "cuidador")
-        {
+        else if (tipoUsuario == "cuidador") {
+            idTipo = 4
+
             router.push("./cadastroCuidador2")
         }
-        else
-        {
+        else {
             setAlertaVisivel(true);
         }
     }
@@ -42,37 +45,37 @@ export default function Cadastro1(){
             <View style={styles.container}>
 
                 <View style={styles.containerBarra}>
-                            
+
                     <View style={styles.containerCirculoFeito}>
-                                    
+
                         <View style={styles.containerTexto}> <Text style={styles.numeroAtual}> 1 </Text> </View>
-                                
+
                     </View>
-                    
+
                     <View style={styles.linha}> </View>
-                    
+
                     <View style={styles.containerCirculo}>
-                                    
+
                         <View style={styles.containerTexto}> <Text style={styles.numero}> 2 </Text> </View>
-                                
+
                     </View>
-                    
+
                     <View style={styles.linha}> </View>
-                    
+
                     <View style={styles.containerCirculo}>
-                                    
+
                         <View style={styles.containerTexto}> <Text style={styles.numero}> 3 </Text> </View>
-                                
+
                     </View>
-                    
+
                     <View style={styles.linha}> </View>
-                    
+
                     <View style={styles.containerCirculo}>
-                                    
+
                         <View style={styles.containerTexto}> <Text style={styles.numero}> 4 </Text> </View>
-                                
+
                     </View>
-                    
+
                 </View>
 
                 <Text style={styles.titulo}> Vamos Começar! </Text>
@@ -80,8 +83,8 @@ export default function Cadastro1(){
                 <View style={styles.containerTextoPicker}>
 
                     <Text style={styles.textoPicker}> Informe seu tipo de usuário: </Text>
-                    
-                    <View style={styles.containerPicker}> 
+
+                    <View style={styles.containerPicker}>
                         <Picker selectedValue={tipoUsuario} onValueChange={(tipoUsuarioSelecionado) => setTipoUsuario(tipoUsuarioSelecionado)} style={styles.picker}>
                             <Picker.Item label="Utilizador Comum" value="utilizador" />
                             <Picker.Item label="Responsável" value="responsavel" />
@@ -91,11 +94,11 @@ export default function Cadastro1(){
 
                 </View>
 
-                <View style={styles.containerBotao}> <Botao texto="Próximo" onPress={proximo} width={150}/> </View>
-            
+                <View style={styles.containerBotao}> <Botao texto="Próximo" onPress={proximo} width={150} /> </View>
+
             </View>
 
-            <AlertCustomizado visivel={alertaVisivel} onPress={() => setAlertaVisivel(false)}/>
+            <AlertCustomizado visivel={alertaVisivel} onPress={() => setAlertaVisivel(false)} />
 
         </View>
     );

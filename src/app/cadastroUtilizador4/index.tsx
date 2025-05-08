@@ -8,6 +8,7 @@ import { AlertCustomizado } from "../../components/alertCustomizado";
 import { useState, useContext } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FormContext } from '../../context/FormContext';
+import { idTipo } from '../cadastro1/index'
 
 
 export default function CadastroUtilizador4() {
@@ -63,44 +64,68 @@ export default function CadastroUtilizador4() {
 
 
     }*/
-        console.log("Contexto atual:", state);
+    console.log("Contexto atual:", state);
+    console.log("id tipo :", idTipo)
 
 
-        async function proximo() {
-            const requestBody = {
-                cpf: state.cpf,
-                nome: state.nome,
-                sobrenome: state.sobrenome,
-                dtNascimento: state.dtNascimento,
-                email: state.email,
-                telefone: state.telefone,
-                username: state.username,
-                senhaString: state.senhaString,
-                cpfResponsavel,
-                cpfCuidador
-            };
-        
-            try {
-                const response = await fetch('http://medicareapi.somee.com/Medicare_Api/Utilizador/SingUp', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(requestBody),
-                });
-        
-                if (!response.ok) {
-                    throw new Error(`Erro de cadastro: ${response.status}`);
-                }
-        
-                Alert.alert('Cadastro realizado!', 'Você foi cadastrado com sucesso!', [
-                    { text: 'OK', onPress: () => router.replace('./home') },
-                ]);
-            } catch (error) {
-                console.error("Erro na requisição:", error);
-                setAlertaVisivel(true);
+    async function proximo() {
+        const requestBody = {
+            cpf: state.cpf,
+            nome: state.nome,
+            sobrenome: state.sobrenome,
+            dtNascimento: state.dtNascimento,
+            email: state.email,
+            telefone: state.telefone,
+            username: state.username,
+            senhaString: state.senhaString,
+            cpfResponsavel,
+            cpfCuidador
+        };
+
+        try {
+            const response = await fetch('http://medicareapi.somee.com/Medicare_Api/Utilizador/SingUp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erro de cadastro: ${response.status}`);
             }
+            const data = await response.json(); // Obtendo a resposta com o id do usuário
+            const novoUsuarioId = data.idUtilizador; // O id do novo usuário
+            console.log("id utilizador  :", novoUsuarioId)
+
+
+            // Agora, após criar o usuário, enviar o segundo POST para associar o tipo de usuário
+            const tipoUsuarioPostBody = {
+                "idUtilizador": novoUsuarioId,
+                "idTipoUtilizador": idTipo
+            };
+
+            // Enviar o segundo POST para associar o tipo de usuário
+            const responseTipoUsuario = await fetch('http://medicareapi.somee.com/Medicare_Api/UtilizadorTipoUtilizador', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(tipoUsuarioPostBody),
+            });
+
+            if (!responseTipoUsuario.ok) {
+                throw new Error(`Erro ao associar tipo de usuário: ${responseTipoUsuario.status}`);
+            }
+
+            Alert.alert('Cadastro realizado!', 'Você foi cadastrado com sucesso!', [
+                { text: 'OK', onPress: () => router.replace('./home') },
+            ]);
+        } catch (error) {
+            console.error("Erro na requisição:", error);
+            setAlertaVisivel(true);
         }
+    }
 
     return (
         <View style={styles.containerPai}>
