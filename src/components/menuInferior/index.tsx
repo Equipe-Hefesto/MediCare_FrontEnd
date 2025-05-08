@@ -37,7 +37,7 @@ export function MenuInferior({cor1, cor2, cor3, cor4}:Props){
                 <TouchableOpacity style={styles.iconeTexto} onPress={() => router.replace('/cadastroRemedio')}>
 
                     <MaterialCommunityIcons color={cor3} style={styles.icone} name="pill"/>
-                    <Text style={{marginTop: 5, color: cor3}}> Medicamentos </Text>      
+                    <Text style={{marginTop: 5, color: cor3}}> Remédios </Text>      
                
                 </TouchableOpacity>
                 

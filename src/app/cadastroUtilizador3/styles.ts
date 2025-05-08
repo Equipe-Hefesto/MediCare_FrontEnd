@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     },
 
     containerInputs:{
-        marginTop: 20,
+        marginTop: 0,
     },
 
     containerInput:{
@@ -80,5 +80,21 @@ export const styles = StyleSheet.create({
         borderColor: "#267797",
         height: 1,
         alignSelf: "center",
+    },
+    label: {
+        fontSize: 16,
+        marginBottom: 5,
+        marginLeft: 10,
+        color: "#000",
+    },
+    
+    inputText: {
+        borderWidth: 1,
+        borderColor: "#267797",
+        borderRadius: 5,
+        height: 40,
+        paddingLeft: 10,
+        marginHorizontal: 10,
+        backgroundColor: "#fff",
     },
 })
