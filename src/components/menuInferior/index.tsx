@@ -27,7 +27,7 @@ export function MenuInferior({cor1, cor2, cor3, cor4}:Props){
 
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.iconeTexto}>
+                <TouchableOpacity style={styles.iconeTexto} onPress={() => router.replace('/Calendario')}>
 
                     <MaterialCommunityIcons color={cor2} style={styles.icone} name="calendar-month"/>
                     <Text style={{marginTop: 5, color: cor2}}> Calendário </Text>  

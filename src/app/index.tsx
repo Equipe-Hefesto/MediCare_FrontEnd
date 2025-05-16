@@ -1,7 +1,10 @@
-import { Cadastro0Login } from "../app/cadastro0Login";
+import  Inicial from "./Inicial";
+import RemedioCadastro1 from "./RemedioCadastro4";
+import CadastroRemedio from "./cadastroRemedio";
+import CadastroRemedio2 from "./cadastroRemedio2";
 
 export default function Index(){
     return (
         
-    <Cadastro0Login />)
+    <RemedioCadastro1 />)
 }

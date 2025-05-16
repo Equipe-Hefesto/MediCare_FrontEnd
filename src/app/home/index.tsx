@@ -3,12 +3,22 @@ import {MenuInferior} from "../../components/menuInferior";
 import {TopBar} from "../../components/topBar";
 import {styles} from "../home/styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "expo-router";
+import { AuthContext } from "@/src/context/AuthContext";
 
 export default function TelaInicial(){
     const [alertaVisivel, setAlertaVisivel] = useState(false);
     const router = useRouter();
+    const auth = useContext(AuthContext);
+    
+    if (!auth) {
+      console.log("Deu erro auth")
+      return null;
+    }
+    const { token, saveToken, removeToken, loading } = auth;
+
+    console.log("token ", token)
     return (
         <View style={styles.containerPai}>
             
@@ -28,7 +38,7 @@ export default function TelaInicial(){
            
             </View>
             
-            <TouchableOpacity activeOpacity={0.8} style={styles.containerBotao}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.containerBotao} onPress={() => router.replace('/Calendario')}>
                    
                 <View style={styles.iconeBotao}>
                    
