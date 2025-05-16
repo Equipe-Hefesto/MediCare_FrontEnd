@@ -16,8 +16,8 @@ export function AlertCustomizado( { visivel, onPress }: Props ){
 
       <View style={styles.containerPai}>
 
-        <View style={styles.containerSuperior}>
-          
+       <View style={styles.containerSuperior}>
+       {/* Espaço reservado para algo futuro */}
         </View>
 
         <View style={styles.containerInferior}>

@@ -3,6 +3,7 @@ import { MenuInferior } from "../../components/menuInferior";
 import { TopBar } from "../../components/topBar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { styles } from "./styles"
+import { router } from "expo-router";
 
 export default function CadastroRemedio(){
     return(
@@ -16,7 +17,7 @@ export default function CadastroRemedio(){
 
                         <Text style={styles.titulo}> Clique para adicionar seu remédio </Text>
 
-                        <TouchableOpacity activeOpacity={0.7} style={styles.containerBotao}>
+                        <TouchableOpacity activeOpacity={0.7} onPress={() => router.replace('./RemedioCadastro1')} style={styles.containerBotao}>
                             
                             <MaterialCommunityIcons name="plus" style={styles.icone} />
 
