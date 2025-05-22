@@ -62,7 +62,7 @@ export default function UtilizadorCadastro1() {
         const [day, month, year] = text.split('/').map(Number);
         const date = new Date(year, month - 1, day);
 
-        // Formata a data para o formato ISO
+       
         const isoDate = date.toISOString();
 
         // Envia a data no formato ISO para o dispatch

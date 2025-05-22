@@ -9,10 +9,14 @@ import { TopBar } from "@/src/components/topBar";
 import { PosologiaContext } from "@/src/context/PosologiaContext";
 import { InputTexto } from "@/src/components/inputTexto";
 import InputPicker from "@/src/components/inputPicker";
+import { MenuLateral } from "@/src/components/menuLateral";
+import { useMenu } from "@/src/context/menuContext";
 
 export default function RemedioCadastro2() {
   const router = useRouter();
   const { state, dispatch } = useContext(PosologiaContext);
+      const { menuAberto } = useMenu();
+  
 
   const [tecladoVisivel, setTecladoVisivel] = useState(false);
 
@@ -101,6 +105,7 @@ export default function RemedioCadastro2() {
   return (
     <View style={styles.containerPai}>
       <TopBar />
+                  {menuAberto && <MenuLateral />}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={[

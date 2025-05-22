@@ -1,18 +1,20 @@
-import React, { createContext, useReducer, ReactNode } from "react";
+import React, { createContext, useReducer, ReactNode, useEffect, useContext } from "react";
+import { AuthContext } from "./AuthContext"; // ajusta o caminho
+import {jwtDecode} from "jwt-decode";
 
 type PosologiaState = {
-  idRemedio:number;
+  idRemedio: number;
   idUtilizador: number;
   quantidade: string;
   idTipoFarmaceutico: string;
   quantidadeDose: string;
   idTipoGrandeza: string;
-  idTipoAgendamento: string;
+  idTipoAgendamento: number;
   horarios: string[];
   dataInicio: string;
   dataFim: string;
   intervalo: string;
-  diasSemana: string[];
+  diasSemana: number[];
   diasUso: string;
   diasPausa: string;
 };
@@ -21,10 +23,10 @@ const initialState: PosologiaState = {
   idRemedio: 0,
   idUtilizador: 0,
   quantidade: "",
-  idTipoFarmaceutico:"",
+  idTipoFarmaceutico: "",
   quantidadeDose: "",
   idTipoGrandeza: "",
-  idTipoAgendamento: "",
+  idTipoAgendamento: 0,
   horarios: [],
   dataInicio: "",
   dataFim: "",
@@ -55,6 +57,22 @@ export const PosologiaContext = createContext<{
 
 export const PosologiaProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    if (authContext?.token) {
+      try {
+        const decoded: any = jwtDecode(authContext.token);
+        const userId = decoded?.id || decoded?.userId || decoded?.sub;
+
+        if (userId) {
+          dispatch({ campo: "idUtilizador", valor: userId });
+        }
+      } catch (error) {
+        console.error("Erro ao decodificar o token:", error);
+      }
+    }
+  }, [authContext?.token]);
 
   return (
     <PosologiaContext.Provider value={{ state, dispatch }}>

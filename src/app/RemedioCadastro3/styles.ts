@@ -55,5 +55,11 @@ export const styles = StyleSheet.create({
     },
     container: {
         width: 158
-    }
+    },
+     errorText: {
+    marginTop: 0,
+    marginLeft: 32,
+    fontSize: 14,
+    color: "#FF4D4D", 
+  },
 });

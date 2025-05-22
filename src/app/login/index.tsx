@@ -25,7 +25,7 @@ if (!auth) {
   return null;
 }
 
-const { token, saveToken, removeToken, loading } = auth;
+const {saveToken} = auth;
   async function proximo() {
     if (credencial == "") {
       setCredencialErro(true)

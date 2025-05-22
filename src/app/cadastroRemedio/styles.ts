@@ -45,4 +45,17 @@ export const styles = StyleSheet.create({
         alignSelf: "center",
         fontSize: 150,
     },
+    icon:{
+        margin:8
+    },
+    fundo:{
+        backgroundColor:"#004059",
+        height: 200,
+    },
+    textoHeader:{
+        margin:24,
+        fontSize:32,
+        color:"#fff",
+        fontWeight:"bold"
+    }
 })

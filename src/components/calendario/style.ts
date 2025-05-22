@@ -108,12 +108,12 @@ export const styles = StyleSheet.create({
     modalLabel: {
         fontSize: 12,
         fontWeight: 'bold',
-        color: '#888',
-        marginTop: 10
+        color: '#004D61',
+        width: 200
     },
     modalText: {
         fontSize: 14,
-        color: '#333',
+        color: '#888',
         marginTop: 2
     },
     closeButton: {
@@ -124,4 +124,9 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         alignSelf: 'flex-end',
     },
+    hora:{
+        textAlignVertical:"center",
+         fontWeight: 'bold',
+    }
+    
 });

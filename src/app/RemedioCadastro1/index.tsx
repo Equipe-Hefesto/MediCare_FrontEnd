@@ -9,6 +9,9 @@ import { MenuInferior } from "@/src/components/menuInferior";
 import { SearchPicker } from "@/src/components/inputSearch";
 import { TopBar } from "@/src/components/topBar";
 import { PosologiaContext } from "@/src/context/PosologiaContext";
+import { AuthContext } from "@/src/context/AuthContext";
+import { MenuLateral } from "@/src/components/menuLateral";
+import { useMenu } from "@/src/context/menuContext";
 
 type Remedio = {
     idRemedio: number;
@@ -18,12 +21,15 @@ type Remedio = {
 export default function RemedioCadastro1() {
     const router = useRouter();
     const { state, dispatch } = useContext(PosologiaContext);
-
+    const { id } = useContext(AuthContext)!;
     const [remedios, setRemedios] = useState<Remedio[]>([]);
     const [remedio, setRemedio] = useState("");
     const [remedioId, setRemedioId] = useState(state.idRemedio);
     const [remedioErro, setRemedioErro] = useState(false);
     const [tecladoVisivel, setTecladoVisivel] = useState(false);
+        const { menuAberto } = useMenu();
+    
+
 
     useEffect(() => {
         const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
@@ -38,6 +44,11 @@ export default function RemedioCadastro1() {
             hideSubscription.remove();
         };
     }, []);
+        useEffect(() => {
+  if (id !== null) {
+    dispatch({ campo: "idUtilizador", valor: id });
+  }
+}, [id]);
 
     useEffect(() => {
         const fetchRemedios = async () => {
@@ -123,7 +134,7 @@ export default function RemedioCadastro1() {
     return (
         <View style={styles.containerPai}>
             <TopBar />
-
+                        {menuAberto && <MenuLateral />}
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : undefined}
                 style={[

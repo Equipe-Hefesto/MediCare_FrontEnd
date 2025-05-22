@@ -30,8 +30,8 @@ export const styles = StyleSheet.create({
     },
 
     imagem:{
-        width: 100,
-        height: 100,
+        width: 128,
+        height: 128,
         borderRadius: 360,
         alignSelf: "center",
     },

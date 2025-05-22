@@ -8,15 +8,18 @@ import { MenuInferior } from "@/src/components/menuInferior";
 import { TopBar } from "@/src/components/topBar";
 import { PosologiaContext } from "@/src/context/PosologiaContext";
 import { RadioCard } from "@/src/components/radioCard";
+import { MenuLateral } from "@/src/components/menuLateral";
+import { useMenu } from "@/src/context/menuContext";
 
 export default function RemedioCadastro1() {
   const router = useRouter();
   const { state, dispatch } = useContext(PosologiaContext);
+      const { menuAberto } = useMenu();
+  
 
   const [tecladoVisivel, setTecladoVisivel] = useState(false);
-
   const [tipoAgendamento, setTipoAgendamento] = useState("");
-  
+  const [tipoAgendamentoErro, setTipoAgendamentoErro] = useState(false);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => setTecladoVisivel(true));
@@ -27,12 +30,30 @@ export default function RemedioCadastro1() {
     };
   }, []);
 
- 
   const proximo = () => {
-    
-
-    router.replace("./RemedioCadastro4");
+    switch (tipoAgendamento) {
+      case "hora":
+        dispatch({ campo: "idTipoAgendamento", valor: 1 });
+        router.replace("./RemedioCadastro4-1");
+        break;
+      case "intervalo":
+        dispatch({ campo: "idTipoAgendamento", valor: 2 });
+        router.replace("./RemedioCadastro4-2");
+        break;
+      case "diaSemana":
+        dispatch({ campo: "idTipoAgendamento", valor: 3 });
+        router.replace("./RemedioCadastro4-3");
+        break;
+      case "ciclo":
+        dispatch({ campo: "idTipoAgendamento", valor: 4 });
+        router.replace("./RemedioCadastro4-4");
+        break;
+      default:
+        setTipoAgendamentoErro(true);
+        return;
+    }
   };
+
 
 
   console.log("INFO: ", state)
@@ -40,6 +61,7 @@ export default function RemedioCadastro1() {
   return (
     <View style={styles.containerPai}>
       <TopBar />
+                  {menuAberto && <MenuLateral />}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={[
@@ -52,40 +74,43 @@ export default function RemedioCadastro1() {
         </View>
 
         <Text style={styles.titulo}>Qual frequência você toma?</Text>
+        {tipoAgendamentoErro && (
+          <Text style={styles.errorText}>Selecione uma opção.</Text>
+        )}
 
         <View style={styles.scrollContainer}>
-      
-            <RadioCard
-              title="Hora"
-              description="Agendamento baseado em horários fixos ao longo do dia."
-              subtitle="Escolha horários específicos para tomar a medicação."
-              selected={tipoAgendamento === "hora"}
-              onPress={() => setTipoAgendamento("hora")}
-            />
 
-            <RadioCard
-              title="Intervalo"
-              description="Tome o medicamento em intervalos regulares de tempo."
-              subtitle="Ideal para remédios que precisam ser tomados a cada X horas."
-              selected={tipoAgendamento === "intervalo"}
-              onPress={() => setTipoAgendamento("intervalo")}
-            />
+          <RadioCard
+            title="Hora"
+            description="Agendamento baseado em horários fixos ao longo do dia."
+            subtitle="Escolha horários específicos para tomar a medicação."
+            selected={tipoAgendamento === "hora"}
+            onPress={() => setTipoAgendamento("hora")}
+          />
 
-            <RadioCard
-              title="Dia da Semana"
-              description="Agende a medicação com base nos dias da semana."
-              subtitle="Use para medicamentos tomados só em dias específicos."
-              selected={tipoAgendamento === "diaSemana"}
-              onPress={() => setTipoAgendamento("diaSemana")}
-            />
+          <RadioCard
+            title="Intervalo"
+            description="Tome o medicamento em intervalos regulares de tempo."
+            subtitle="Ideal para remédios que precisam ser tomados a cada X horas."
+            selected={tipoAgendamento === "intervalo"}
+            onPress={() => setTipoAgendamento("intervalo")}
+          />
 
-            <RadioCard
-              title="Ciclo"
-              description="Agendamento cíclico com intervalos de dias entre doses."
-              subtitle="Exemplo: tomar por 5 dias e pausar por 2 dias."
-              selected={tipoAgendamento === "ciclo"}
-              onPress={() => setTipoAgendamento("ciclo")}
-            />
+          <RadioCard
+            title="Dia da Semana"
+            description="Agende a medicação com base nos dias da semana."
+            subtitle="Use para medicamentos tomados só em dias específicos."
+            selected={tipoAgendamento === "diaSemana"}
+            onPress={() => setTipoAgendamento("diaSemana")}
+          />
+
+          <RadioCard
+            title="Ciclo"
+            description="Agendamento cíclico com intervalos de dias entre doses."
+            subtitle="Exemplo: tomar por 5 dias e pausar por 2 dias."
+            selected={tipoAgendamento === "ciclo"}
+            onPress={() => setTipoAgendamento("ciclo")}
+          />
         </View>
 
         {!tecladoVisivel && (

@@ -1,36 +1,43 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, FlatList, PanResponder, GestureResponderEvent, PanResponderGestureState, Modal, } from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    FlatList,
+    PanResponder,
+    GestureResponderEvent,
+    PanResponderGestureState,
+    Modal,
+    ScrollView,
+} from 'react-native';
 import dayjs, { Dayjs } from 'dayjs';
 import { BlurView } from 'expo-blur';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { styles } from './style';
-
 import 'dayjs/locale/pt';
 
 dayjs.locale('pt');
-interface Reminder {
-    date: string;
-    note: string;
-    situacao: string;
-    dosage?: string;
-    observacao?: string;
+
+interface Alarme {
+    idAlarme: number;
+    idPosologia: number;
+    dataHora: string;
+    descricao: string;
+    status: string; // 'A', 'P', 'C'
+    posologia: any | null;
 }
 
 interface CalendarProps {
-    reminders?: Reminder[];
+    alarmes?: Alarme[];
     onDayPress?: (date: Dayjs) => void;
 }
 
 const Calendar: React.FC<CalendarProps> = ({
-    reminders = [],
+    alarmes = [],
     onDayPress = () => { },
 }) => {
     const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectedReminder, setSelectedReminder] = useState<Reminder | null>(
-        null
-    );
-
+    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
     const startOfMonth = currentDate.startOf('month');
     const startDay = startOfMonth.day();
@@ -62,23 +69,42 @@ const Calendar: React.FC<CalendarProps> = ({
         })
     ).current;
 
-    const getBackgroundColorForSituacao = (situacao: string) => {
-        switch (situacao) {
-            case 'pendente':
-                return 'rgba(255, 217, 0, 0.7)';
-            case 'concluido':
-                return 'rgba(144, 238, 144, 0.7)';
-            case 'atrasado':
-                return 'rgba(255, 99, 71, 0.7)';
+    const getBackgroundColorForStatus = (status: string) => {
+        switch (status) {
+            case 'S':
+                return 'rgba(255, 217, 0, 0.7)'; // pendente
+            case 'T':
+                return 'rgba(144, 238, 144, 0.7)'; // concluído
+            case 'A':
+                return 'rgba(255, 99, 71, 0.7)'; // ativo/atrasado
             default:
                 return 'rgba(38, 119, 151, 0.7)';
         }
     };
 
-    const handleReminderPress = (reminder: Reminder) => {
-        setSelectedReminder(reminder);
+    const getStatusLabel = (status: string) => {
+        switch (status) {
+
+            case 'T':
+                return 'Tomado';
+            case 'A':
+                return 'Atrasado';
+            case 'S':
+                return 'Adiado';
+            default:
+                return 'Desconhecido';
+        }
+    };
+
+    const handleDayPress = (date: Dayjs) => {
+        onDayPress(date);
+        setSelectedDate(date);
         setModalVisible(true);
     };
+
+    const alarmesForSelectedDate = alarmes.filter((a) =>
+        selectedDate && dayjs(a.dataHora).isSame(selectedDate, 'day')
+    );
 
     return (
         <View style={styles.card} {...panResponder.panHandlers}>
@@ -108,9 +134,7 @@ const Calendar: React.FC<CalendarProps> = ({
                     renderItem={({ item }) => {
                         const isCurrentMonth = item.month() === currentDate.month();
                         const isToday = item.isSame(dayjs(), 'day');
-                        const reminder = reminders.find((r) =>
-                            dayjs(r.date).isSame(item, 'day')
-                        );
+                        const alarmsOfDay = alarmes.filter(a => dayjs(a.dataHora).isSame(item, 'day'));
 
                         return (
                             <TouchableOpacity
@@ -119,35 +143,45 @@ const Calendar: React.FC<CalendarProps> = ({
                                     !isCurrentMonth && styles.dayOutsideMonth,
                                     isToday && styles.todayCell,
                                 ]}
-                                onPress={() => {
-                                    onDayPress(item);
-                                    if (reminder) handleReminderPress(reminder);
-                                }}
+                                onPress={() => handleDayPress(item)}
                             >
                                 <Text
-                                    style={[styles.dayNumber, !isCurrentMonth && styles.dayNumberOutside]}
+                                    style={[
+                                        styles.dayNumber,
+                                        !isCurrentMonth && styles.dayNumberOutside,
+                                    ]}
                                 >
                                     {item.date()}
                                 </Text>
-                                {reminder && (
-                                    <Text
-                                        style={[
-                                            styles.reminderText,
-                                            { backgroundColor: getBackgroundColorForSituacao(reminder.situacao) },
-                                        ]}
-                                        numberOfLines={1}
-                                        ellipsizeMode="tail"
-                                    >
-                                        {reminder.note}
-                                    </Text>
+
+                                {alarmsOfDay.map((alarm, i) => (
+                                    i < 3 ? (
+                                        <Text
+                                            key={alarm.idAlarme}
+                                            style={[
+                                                styles.reminderText,
+                                                { backgroundColor: getBackgroundColorForStatus(alarm.status) },
+                                            ]}
+                                            numberOfLines={1}
+                                            ellipsizeMode="tail"
+                                        >
+                                            {alarm.descricao}
+                                        </Text>
+                                    ) : null
+                                ))}
+
+                                {alarmsOfDay.length > 3 && (
+                                    <Text /*style={styles.moreRemindersText}*/>...</Text>
                                 )}
                             </TouchableOpacity>
+
+
                         );
                     }}
                 />
             </View>
 
-            {selectedReminder && (
+            {selectedDate && (
                 <Modal
                     transparent
                     visible={modalVisible}
@@ -156,19 +190,37 @@ const Calendar: React.FC<CalendarProps> = ({
                 >
                     <BlurView intensity={70} tint="light" style={styles.modalOverlay}>
                         <View style={styles.modalCard}>
-                            <Text style={styles.modalTitle}>
-                                <MaterialCommunityIcons size={32} name="pill" />
-                                {selectedReminder.note}
+                            <Text
+                                style={{
+                                    ...styles.modalTitle,
+                                    borderBottomWidth: 1,
+                                    borderBottomColor: '#ccc',
+                                    borderStyle: 'dotted',
+                                    paddingBottom: 8,
+                                    marginBottom: 12,
+                                }}
+                            >
+                                {selectedDate.format('DD [de] MMMM (dddd)')}
                             </Text>
-
-                            <Text style={styles.modalLabel}>Situação</Text>
-                            <Text style={styles.modalText}>{selectedReminder.situacao}</Text>
-
-                            <Text style={styles.modalLabel}>Data Lembrete</Text>
-                            <Text style={styles.modalText}>{selectedReminder.date}</Text>
-
-                            <Text style={styles.modalLabel}>Observação</Text>
-                            <Text style={styles.modalText}>{selectedReminder.observacao || '—'}</Text>
+                            <ScrollView style={{ height: 320 }}>
+                                {alarmesForSelectedDate.length > 0 ? (
+                                    alarmesForSelectedDate.map(alarm => (
+                                        <TouchableOpacity>
+                                            <View key={alarm.idAlarme} style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", margin: 8 }}>
+                                                <Text style={styles.hora}>
+                                                    {dayjs(alarm.dataHora).format('HH:mm')}
+                                                </Text>
+                                                <View style={{ display: "flex", flexDirection: "column" }}>
+                                                    <Text style={styles.modalLabel}>{alarm.descricao}</Text>
+                                                    <Text style={styles.modalText}>{getStatusLabel(alarm.status)}</Text>
+                                                </View>
+                                                <View style={{ width: 20, height: 20, backgroundColor: getBackgroundColorForStatus(alarm.status), borderRadius: 360, display: "flex", flexDirection: "column", alignSelf: "center", marginRight: 16 }}></View>
+                                            </View>
+                                        </TouchableOpacity>
+                                    ))
+                                ) : (
+                                    <Text style={styles.modalText}>Nenhum alarme para este dia.</Text>
+                                )}</ScrollView>
 
                             <TouchableOpacity
                                 onPress={() => setModalVisible(false)}
@@ -183,6 +235,5 @@ const Calendar: React.FC<CalendarProps> = ({
         </View>
     );
 };
-
 
 export default Calendar;
