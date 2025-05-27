@@ -6,11 +6,17 @@ type Variant = "default" | "withCheck" | "mixed" | "allCheck";
 
 interface Props {
   variant?: Variant;
-  currentStep: number; 
+  currentStep: number;
+  stepsCount?: 2 | 4;  // define 2 ou 4 passos
 }
 
-export const ProgressBar = ({ variant = "default", currentStep }: Props) => {
-  const steps = [1, 2, 3, 4];
+export const ProgressBar = ({
+  variant = "default",
+  currentStep,
+  stepsCount = 4,
+}: Props) => {
+  // Gera array [1, 2] ou [1, 2, 3, 4] dependendo do stepsCount
+  const steps = Array.from({ length: stepsCount }, (_, i) => i + 1);
 
   const renderStep = (step: number) => {
     const isCompleted = step < currentStep;
@@ -23,23 +29,28 @@ export const ProgressBar = ({ variant = "default", currentStep }: Props) => {
       variant === "allCheck";
 
     const styleCircle =
-      isCompleted || isCurrent
-        ? styles.stepCircleDone
-        : styles.stepCircle;
+      isCompleted || isCurrent ? styles.stepCircleDone : styles.stepCircle;
+
+    // Ajuste para quando é 2 steps e variant allCheck, evitar check no último
+    const isLastStep = step === stepsCount;
 
     const content =
-  showCheck && (isCompleted || (variant === "allCheck" && step !== 4)) ? (
-    <MaterialCommunityIcons name="check" color="#fff" size={18} />
-  ) : (
-    <Text style={isCurrent || variant === "allCheck" ? styles.currentText : styles.stepText}>
-      {step}
-    </Text>
-  );
+      showCheck && (isCompleted || (variant === "allCheck" && !isLastStep)) ? (
+        <MaterialCommunityIcons name="check" color="#fff" size={18} />
+      ) : (
+        <Text
+          style={
+            isCurrent || variant === "allCheck" ? styles.currentText : styles.stepText
+          }
+        >
+          {step}
+        </Text>
+      );
 
     return (
       <View key={step} style={styles.stepItem}>
         <View style={styleCircle}>{content}</View>
-        {step !== 4 && <View style={styles.stepLine} />}
+        {step !== stepsCount && <View style={styles.stepLine} />}
       </View>
     );
   };
@@ -84,7 +95,6 @@ const styles = StyleSheet.create({
     color: "#267797",
     fontWeight: "bold",
     fontFamily: "Montserrat",
-    
   },
   currentText: {
     color: "#fff",

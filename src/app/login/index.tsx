@@ -20,12 +20,12 @@ export default function Login() {
   const [senhaErro, setSenhaErro] = useState(false);
   const auth = useContext(AuthContext);
 
-if (!auth) {
-  console.log("Deu erro auth")
-  return null;
-}
+  if (!auth) {
+    console.log("Deu erro auth")
+    return null;
+  }
 
-const {saveToken} = auth;
+  const { saveToken } = auth;
   async function proximo() {
     if (credencial == "") {
       setCredencialErro(true)
@@ -49,16 +49,16 @@ const {saveToken} = auth;
           }),
         }
       );
-const contentType = response.headers.get("content-type");
+      const contentType = response.headers.get("content-type");
 
       // Se der erro HTTP (400, 500...) cai no catch
       if (!response.ok) {
-         if (contentType && contentType.includes("application/json")) {
-            const errorData = await response.json();
-            console.error("Erro no servidor:", errorData);
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          console.error("Erro no servidor:", errorData);
         } else {
-            const errorText = await response.text();
-            console.error("Erro no servidor (texto):", errorText);
+          const errorText = await response.text();
+          console.error("Erro no servidor (texto):", errorText);
         }
         throw new Error(`Erro de login: ${response.status}`);
       }
@@ -119,14 +119,15 @@ const contentType = response.headers.get("content-type");
             <Text style={styles.esqueceuSenha}>
               Esqueceu sua senha?
             </Text>
-          </View> 
+          </View>
 
 
         </ScrollView>
-
-        <View style={styles.containerBotao}>
+        (<View style={styles.containerBotao}>
+          <Botao texto="Voltar" width={150} onPress={() => router.replace("./Inicial")} tipo="outlined" />
           <Botao texto="Próximo" width={150} onPress={proximo} />
-        </View>
+        </View>)
+
 
         <AlertCustomizado visivel={alertaVisivel} onPress={() => setAlertaVisivel(false)} />
       </KeyboardAvoidingView>

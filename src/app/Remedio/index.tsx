@@ -22,7 +22,7 @@ type Remedio = {
     nome: string;
 };
 
-export default function CadastroRemedio() {
+export default function Remedio() {
     const [posologia, setPosologia] = useState<Posologia[]>([]);
     const [remedios, setRemedios] = useState<Remedio[]>([]);
     const [loading, setLoading] = useState(true);

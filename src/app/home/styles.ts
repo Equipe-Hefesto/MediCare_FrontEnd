@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     },
 
     bemVindoUsuario:{
+        alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
     },

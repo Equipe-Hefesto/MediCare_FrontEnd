@@ -33,7 +33,7 @@ interface CalendarProps {
 
 const Calendar: React.FC<CalendarProps> = ({
     alarmes = [],
-    onDayPress = () => { },
+    onDayPress = () => {},
 }) => {
     const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
     const [modalVisible, setModalVisible] = useState(false);
@@ -72,11 +72,11 @@ const Calendar: React.FC<CalendarProps> = ({
     const getBackgroundColorForStatus = (status: string) => {
         switch (status) {
             case 'S':
-                return 'rgba(255, 217, 0, 0.7)'; // pendente
+                return 'rgba(255, 217, 0, 0.7)';
             case 'T':
-                return 'rgba(144, 238, 144, 0.7)'; // concluído
+                return 'rgba(144, 238, 144, 0.7)';
             case 'A':
-                return 'rgba(255, 99, 71, 0.7)'; // ativo/atrasado
+                return 'rgba(255, 99, 71, 0.7)';
             default:
                 return 'rgba(38, 119, 151, 0.7)';
         }
@@ -84,7 +84,6 @@ const Calendar: React.FC<CalendarProps> = ({
 
     const getStatusLabel = (status: string) => {
         switch (status) {
-
             case 'T':
                 return 'Tomado';
             case 'A':
@@ -111,10 +110,14 @@ const Calendar: React.FC<CalendarProps> = ({
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.monthContainer}>
-                        <Text style={styles.month}>{currentDate.format('MMMM')}</Text>
+                        <Text style={styles.month}>
+                            {currentDate.format('MMMM')}
+                        </Text>
                     </View>
                     <View style={styles.yearContainer}>
-                        <Text style={styles.year}>{currentDate.format('YYYY')}</Text>
+                        <Text style={styles.year}>
+                            {currentDate.format('YYYY')}
+                        </Text>
                     </View>
                 </View>
 
@@ -134,10 +137,13 @@ const Calendar: React.FC<CalendarProps> = ({
                     renderItem={({ item }) => {
                         const isCurrentMonth = item.month() === currentDate.month();
                         const isToday = item.isSame(dayjs(), 'day');
-                        const alarmsOfDay = alarmes.filter(a => dayjs(a.dataHora).isSame(item, 'day'));
+                        const alarmsOfDay = alarmes.filter(a =>
+                            dayjs(a.dataHora).isSame(item, 'day')
+                        );
 
                         return (
                             <TouchableOpacity
+                                key={item.toString()}
                                 style={[
                                     styles.dayCell,
                                     !isCurrentMonth && styles.dayOutsideMonth,
@@ -171,11 +177,9 @@ const Calendar: React.FC<CalendarProps> = ({
                                 ))}
 
                                 {alarmsOfDay.length > 3 && (
-                                    <Text /*style={styles.moreRemindersText}*/>...</Text>
+                                    <Text>...</Text>
                                 )}
                             </TouchableOpacity>
-
-
                         );
                     }}
                 />
@@ -202,25 +206,42 @@ const Calendar: React.FC<CalendarProps> = ({
                             >
                                 {selectedDate.format('DD [de] MMMM (dddd)')}
                             </Text>
+
                             <ScrollView style={{ height: 320 }}>
                                 {alarmesForSelectedDate.length > 0 ? (
                                     alarmesForSelectedDate.map(alarm => (
-                                        <TouchableOpacity>
-                                            <View key={alarm.idAlarme} style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", margin: 8 }}>
+                                        <TouchableOpacity key={alarm.idAlarme}>
+                                            <View
+                                                style={{
+                                                    flexDirection: "row",
+                                                    justifyContent: "space-between",
+                                                    margin: 8
+                                                }}
+                                            >
                                                 <Text style={styles.hora}>
                                                     {dayjs(alarm.dataHora).format('HH:mm')}
                                                 </Text>
-                                                <View style={{ display: "flex", flexDirection: "column" }}>
+                                                <View style={{ flexDirection: "column" }}>
                                                     <Text style={styles.modalLabel}>{alarm.descricao}</Text>
                                                     <Text style={styles.modalText}>{getStatusLabel(alarm.status)}</Text>
                                                 </View>
-                                                <View style={{ width: 20, height: 20, backgroundColor: getBackgroundColorForStatus(alarm.status), borderRadius: 360, display: "flex", flexDirection: "column", alignSelf: "center", marginRight: 16 }}></View>
+                                                <View
+                                                    style={{
+                                                        width: 20,
+                                                        height: 20,
+                                                        backgroundColor: getBackgroundColorForStatus(alarm.status),
+                                                        borderRadius: 360,
+                                                        alignSelf: "center",
+                                                        marginRight: 16,
+                                                    }}
+                                                />
                                             </View>
                                         </TouchableOpacity>
                                     ))
                                 ) : (
                                     <Text style={styles.modalText}>Nenhum alarme para este dia.</Text>
-                                )}</ScrollView>
+                                )}
+                            </ScrollView>
 
                             <TouchableOpacity
                                 onPress={() => setModalVisible(false)}

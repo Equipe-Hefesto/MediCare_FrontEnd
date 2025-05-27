@@ -1,10 +1,9 @@
 import  Inicial from "./Inicial";
-import RemedioCadastro1 from "./RemedioCadastro4-4";
 import UtilizadorPerfil from "./UtilizadorPerfil";
-import CadastroRemedio from "./cadastroRemedio";
+import ApoioCadastro from "./ApoioCadastro1"
 
 export default function Index(){
     return (
         
-    <UtilizadorPerfil/>)
+    <ApoioCadastro/>)
 }

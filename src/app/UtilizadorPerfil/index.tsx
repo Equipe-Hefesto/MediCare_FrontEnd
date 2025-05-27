@@ -26,7 +26,7 @@ export default function UtilizadorPerfil() {
     return null;
   }
 
-  const { token, setImageSource, setPerfilSelecionado } = auth;
+  const { token, setPerfilSelecionado } = auth;
   const [roles, setRoles] = useState<string[]>([]);
 
   useEffect(() => {
@@ -41,7 +41,6 @@ export default function UtilizadorPerfil() {
 
   const selecionarPerfil = (perfil: string, imagePath: string) => {
     setPerfilSelecionado(perfil);
-    setImageSource(imagePath);
     router.replace("./home");
   };
 

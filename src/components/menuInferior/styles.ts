@@ -27,4 +27,14 @@ export const styles = StyleSheet.create({
     icone:{
         fontSize: 25,
     },
+    pontoNotificacao: {
+    position: "absolute",
+    top: -2,
+    right: -6,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "red",
+},
+
 })

@@ -139,7 +139,7 @@ export default function RemedioCadastro4_1() {
 
 
 
-        router.replace('/cadastroRemedio')
+        router.replace('/Remedio')
 
 
       } catch (error) {

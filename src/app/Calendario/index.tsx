@@ -69,7 +69,7 @@ export default function Calendario() {
                 <TopBar />
                 {menuAberto && <MenuLateral />}
                 <View style={styles.card}>
-                    <Text style={{ alignSelf: "center" }}>Carregando...</Text>;
+                    <Text style={{ alignSelf: "center" }}>Carregando...</Text>
                 </View>
                 <MenuInferior cor1="#fff" cor2="#ACE1F5" cor3="#fff" cor4="#fff" />
             </View>)
