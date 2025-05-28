@@ -1,0 +1,23 @@
+name: EAS Build
+
+on:
+  push:
+    branches:
+      - main  # ou a branch que você usa
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Expo
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.TOKEN_DE_ACESSO }}
+
+      - name: Run EAS Build (Android)
+        run: eas build --platform android --non-interactive
