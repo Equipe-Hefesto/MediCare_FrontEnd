@@ -101,7 +101,9 @@ export function MenuLateral() {
 
         <TouchableOpacity><Text style={styles.menuItem}>Conta</Text></TouchableOpacity>
         <TouchableOpacity><Text style={styles.menuItem}>Ajuda</Text></TouchableOpacity>
-        <TouchableOpacity><Text style={styles.menuItem}>Sobre nós</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => router.replace("../SobreNos")}>
+          <Text style={styles.menuItem}>Sobre nós</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => router.replace("/_sitemap")}>
           <Text style={styles.menuItem}>Admin</Text>
         </TouchableOpacity>

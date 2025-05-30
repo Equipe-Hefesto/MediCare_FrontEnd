@@ -115,7 +115,7 @@ export default function RemedioCadastro4_4() {
       }
 
       const data = await response.json();
-      router.replace('/cadastroRemedio');
+      router.replace('/Remedio');
 
     } catch (error) {
       console.error("Erro na requisição:", error);
