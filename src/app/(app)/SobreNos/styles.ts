@@ -33,11 +33,11 @@ export const styles = StyleSheet.create({
     },
 
     titulo: {
-        fontSize: 24,
+        fontSize: 32,
         marginTop: 16,
-        marginBottom:8,
+        marginBottom: 15,
         fontWeight: "bold",
-        color: "#267797",
+        color: "#004059",
         alignSelf: "center",
     },
    containerLinha: {
@@ -47,10 +47,39 @@ export const styles = StyleSheet.create({
     width: 324,
     alignSelf: "center",
     
-},
-container:{
-  width:158
-}
+    },
+    container:{
+    width:158
+    },
 
+    texto: {
+        color: "#004059",
+        fontSize: 18,
+        marginHorizontal: 20,
+        textAlign: "justify",
+        fontWeight: "bold",
+        lineHeight: 30,
+        marginBottom: 100,
+    },
+
+    botao: {
+        backgroundColor: "#267797",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 15,
+        width: "45%",
+        height: 50,
+        marginHorizontal: 10
+    },
+    
+    textoBotao: {
+        fontSize: 20,
+        color: "#fff"
+    },
+
+    botoes: {
+        flexDirection: "row",
+        marginBottom: 50
+    }
   
 });
