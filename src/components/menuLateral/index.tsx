@@ -99,8 +99,12 @@ export function MenuLateral() {
         <Text style={styles.nomePerfil}>{perfilSelecionado}</Text>
         <Text onPress={() => router.replace("/UtilizadorPerfil")} style={styles.trocarPerfil}>Trocar perfil</Text>
 
-        <TouchableOpacity><Text style={styles.menuItem}>Conta</Text></TouchableOpacity>
-        <TouchableOpacity><Text style={styles.menuItem}>Ajuda</Text></TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.menuItem} onPress={() => router.replace("../../Conta")}> Conta </Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.menuItem}>Ajuda</Text>
+          </TouchableOpacity>
         <TouchableOpacity onPress={() => router.replace("/SobreNos")}>
           <Text style={styles.menuItem}>Sobre nós</Text>
         </TouchableOpacity>

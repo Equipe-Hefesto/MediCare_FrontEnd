@@ -1,4 +1,4 @@
-import { View, KeyboardAvoidingView, Platform, Text, Keyboard, TouchableOpacity } from "react-native";
+import { View, KeyboardAvoidingView, Platform, Text, Linking, Keyboard, TouchableOpacity } from "react-native";
 import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Botao } from "../../../components/botao";
@@ -41,31 +41,31 @@ export default function SobreNos() {
           que necessita do uso constante de remédios. Conheça um pouco mais de nós: </Text>
 
           <View style={styles.botoes}>
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao} onPress={() => Linking.openURL("https://www.instagram.com/enzo.n.freitas/")}>
               <Text style={styles.textoBotao}> Enzo </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao} onPress={() => Linking.openURL("https://www.instagram.com/felipe._fbastos/")}>
               <Text style={styles.textoBotao}> Felipe </Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.botoes}>
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao} onPress={() => Linking.openURL("https://www.instagram.com/h_gustavo.7/")}>
               <Text style={styles.textoBotao}> Gustavo </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao} onPress={() => Linking.openURL("https://www.instagram.com/isaxavierz/")}>
               <Text style={styles.textoBotao}> Isabelly </Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.botoes}>
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao} onPress={() => Linking.openURL("https://github.com/Pedro-Ruan")}>
               <Text style={styles.textoBotao}> Pedro </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao} onPress={() => Linking.openURL("https://www.instagram.com/vitor_barsil/")}>
               <Text style={styles.textoBotao}> Vitor </Text>
             </TouchableOpacity>
           </View>
