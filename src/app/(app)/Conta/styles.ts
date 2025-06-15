@@ -80,6 +80,35 @@ export const styles = StyleSheet.create({
     botoes: {
         flexDirection: "row",
         marginBottom: 50
-    }
-  
+    },
+
+    containerTexto: {
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        marginBottom: 30,
+        marginHorizontal: 10,
+
+    },
+
+    categoria: {
+        fontSize: 25,
+        marginBottom: 5,
+    },
+
+    input: {
+        fontSize: 18,
+        color: "#267797"
+    },
+    
+    containerEditavel: {
+        marginLeft: 5,
+        justifyContent: "space-between",
+        flexDirection: "row",
+    },
+
+    textoEditavel: {
+        fontSize: 18,
+        color: "#267797"
+    },
+
 });
